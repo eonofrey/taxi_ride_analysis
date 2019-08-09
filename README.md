@@ -71,14 +71,15 @@ train_df['hour'] = train_df[‘pickup_datetime’].dt.hour
 To see if these will help add any information to the model, I plotted the average fare by month and Year across the full time series of the data. While I was expecting modest increases due to inflation, I was completely thrown off by the massive jump in average fare in September 2012. After a little digging I found that this was a system wide price hike by yellow cabs and not a problem with the data as I originally had assumed (article: https://www.nytimes.com/2012/09/04/nyregion/new-york-taxis-to-start-charging-increased-rates.html)
 
 
+<img width="928" alt="Screen Shot 2019-08-08 at 9 08 47 PM" src="https://user-images.githubusercontent.com/38504767/62814441-e2aceb00-bade-11e9-93f2-83db66999d17.png">
 
-PICTURE 
 
 
 The next plot I made was to see if the number of passengers affected the average fare. Looking at the average fare per passenger count shows that changing the number of passengers in the cab has virtually no effect on the average price of the ride.
 
 
-PICTURE 
+<img width="517" alt="Screen Shot 2019-08-08 at 9 09 33 PM" src="https://user-images.githubusercontent.com/38504767/62814443-e50f4500-bade-11e9-9a92-6efbb4720e3b.png">
+
 
 
 Once I had a month variable, it was quick to map those months to seasons to see if that has any effect on the price of a cab. Using the following lines I create a season variable and then plot the average ride fare per seasons to see if that matters at all. 
@@ -102,7 +103,8 @@ train_df['season'] = train_df['month'].map(season_dict)
 While you can see that jump in september 2012 again, it appears that the season the ride took place in didn’t have much of an effect on price. 
 
 
-PICTURE 
+<img width="682" alt="Screen Shot 2019-08-08 at 9 12 45 PM" src="https://user-images.githubusercontent.com/38504767/62814446-e8a2cc00-bade-11e9-83ca-a652f02dcddb.png">
+
 
 
 
@@ -110,8 +112,7 @@ PICTURE
 
 Plotting the newly-created distance of the ride vs. the fare of the ride shows some unexpected patterns. Outside of the fact that, in general, the longer the ride the more expensive it was we see very clear horizontal lines. A little research reveled these to be airport rides which have a fixed fee that is standardized across the industry. 
 
-
-PICTURE 
+<img width="545" alt="Screen Shot 2019-08-08 at 9 08 36 PM" src="https://user-images.githubusercontent.com/38504767/62814468-ffe1b980-bade-11e9-8313-ddbd32861562.png">
 
 
 
@@ -125,23 +126,21 @@ There is a great article for feature selection that lists 3 main waits to select
 #### Correlation Plot 
 Below is the correlation plot of the base features along with the features I created. Not suprisingly, the distance metrics are the most correlated with the fare amount. These distances are also highly correlated with each other, which is a problem for linear regression models that can’t have high amounts of multicollinearity. 
 
-PICTURE 
+<img width="667" alt="Screen Shot 2019-08-08 at 9 08 21 PM" src="https://user-images.githubusercontent.com/38504767/62814471-053f0400-badf-11e9-9255-5c0ebf61c0b7.png">
 
 
 #### SelectKbest
 
 Sklearn’s SelectKBest module will select the top features for the model, but only looks at them in isolation. It uses _______ as a metric to define feature importance. 
 
-PICTURE 
-
+<img width="329" alt="Screen Shot 2019-08-08 at 9 14 30 PM" src="https://user-images.githubusercontent.com/38504767/62814480-1d168800-badf-11e9-979f-fe8f6d09db91.png">
 
 
 #### Feature Importance 
 A great component of decision trees and random forests is that they calculate the importance of the features given to them. After fitting Sklearn’s ExtraTreeClassifier on the data you can then extra the importance of each feature as determined by the model. 
 
 
-PICTURE 
-
+<img width="503" alt="Screen Shot 2019-08-08 at 9 18 14 PM" src="https://user-images.githubusercontent.com/38504767/62814500-3d464700-badf-11e9-980c-f3eae46650d3.png">
 
 # Prediction
 
@@ -150,8 +149,10 @@ The two models I used in this analysis were a basic linear regression and a rand
 ## Regression 
 Since the correlation plot reveled massive correlations between the distance metrics, I’m going to only use Haversine distance for the linear regression. However, regression also assumes that variables are normally distributed. Plotting the distribution fo a few reveals that not to be the case. In these situations, it’s best to transform the variables either with log or square root transformations to coerce them to be normally distributed. Below are the same variables after I apply various transformations
 
-PICTURE 
-PICTURE 
+<img width="504" alt="Screen Shot 2019-08-08 at 9 19 52 PM" src="https://user-images.githubusercontent.com/38504767/62814487-299ae080-badf-11e9-9286-f9d494b663cd.png">
+
+
+<img width="495" alt="Screen Shot 2019-08-08 at 9 20 13 PM" src="https://user-images.githubusercontent.com/38504767/62814488-2b64a400-badf-11e9-83fe-1cf40fb920bc.png">
 
 
 With the variables normally distributed and not correlated with each other, I fit the linear regression model and ended up with an RMSE of $4.64 for the prediction of the validation data, a large improvement over the ~$8 in the competition’s baseline model. 
