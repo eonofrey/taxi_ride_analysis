@@ -1,6 +1,5 @@
 # Taxi Analysis 
 
-## Exploratory Analysis 
 
 The below an analysis I did for Kaggle’s NYC Taxi Cab Fare Prediction Competition hosted by Google Cloud and Coursera. The competition claimed that a basic model based on the distance between two points would end up with an RMSE of ~$8, so that was the target to beat. 
 
@@ -29,7 +28,7 @@ fare_amount - flat for the dollar amount of the cost of the taxi ride
 
 
 
-# Exploratory Analysis 
+# Exploration 
 Even after dropping NA’s, there is still some nonsensical data in the data frame including: 
 Negative cab fares
 lat/longs of 2500+ (latitude ranges from 0 to 90, longitude from 0 to 180)
