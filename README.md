@@ -167,9 +167,9 @@ Overall I thoroughly enjoyed working with this data and even learned some things
 
 
 # Future Directions 
-remove water points 
-train on more data 
-other models like xgboost 
+- remove water points 
+- train on more data 
+- other models like xgboost 
 
 
 
