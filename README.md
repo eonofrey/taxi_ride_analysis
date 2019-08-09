@@ -126,7 +126,7 @@ There is a great article for feature selection that lists 3 main waits to select
 #### Correlation Plot 
 Below is the correlation plot of the base features along with the features I created. Not suprisingly, the distance metrics are the most correlated with the fare amount. These distances are also highly correlated with each other, which is a problem for linear regression models that can’t have high amounts of multicollinearity. 
 
-<img width="667" alt="Screen Shot 2019-08-08 at 9 08 21 PM" src="https://user-images.githubusercontent.com/38504767/62814471-053f0400-badf-11e9-9255-5c0ebf61c0b7.png">
+<img width="684" alt="Screen Shot 2019-08-09 at 7 55 10 PM" src="https://user-images.githubusercontent.com/38504767/62814607-9d3ced80-badf-11e9-80cc-d557319a43eb.png">
 
 
 #### SelectKbest
