@@ -39,8 +39,8 @@ For the purpose of this analysis I limited the latitudes to between -74.2 and -7
 
 First let’s look at the distribution of fares and passenger counts 
 
-PICTURE 
-PICTURE 
+<img width="400" alt="Screen Shot 2019-08-09 at 6 43 45 PM" src="https://user-images.githubusercontent.com/38504767/62814379-95c91480-bade-11e9-82e6-bb07e4b23594.png">  <img width="400" alt="Screen Shot 2019-08-09 at 6 42 43 PM" src="https://user-images.githubusercontent.com/38504767/62814380-9792d800-bade-11e9-90b0-4f97134e61ad.png">
+
 
 
 Even after limiting the plot to show fares < $75 there is still a heavy right skew to the distribution of fairs, with the vast majority of them below $20. Single-passenger rides are by far the most common, followed by 2-passenger and then 5-passenger rides interestingly enough.
@@ -50,12 +50,13 @@ Even after limiting the plot to show fares < $75 there is still a heavy right sk
 Plotting the lat longs resulted in one of my favorite graphs I’ve ever made. Using a black background and white dots gave it the look of a satellite image of the city taken at night. Unfortunately it also revealed a problem in the data as some rides end in the East and Hudson Rivers. I could get more particular with the lat/lon exclusions but for now leave these data points in the analysis. 
 
 
-PICTURE 
+<img width="626" alt="Screen Shot 2019-08-09 at 6 46 34 PM" src="https://user-images.githubusercontent.com/38504767/62814404-c1e49580-bade-11e9-861b-751892ae3bc6.png">
 
 
 Now that the data has been cleaned and it looks generally fine, it’s time for some feature creation. The first features I created centered around the date and time of the ride.
 
-PICTURE 
+<img width="165" alt="Screen Shot 2019-08-09 at 6 52 24 PM" src="https://user-images.githubusercontent.com/38504767/62814413-c7da7680-bade-11e9-8fe6-5fc69c5d56f1.png">
+
 
 
 
