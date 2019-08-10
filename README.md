@@ -44,38 +44,40 @@ Even after limiting the plot to show fares < $75 there is still a heavy right sk
 Plotting the lat/lons resulted in one of my favorite graphs I’ve ever made. Using a black background and white dots gave it the look of a satellite image of the city taken at night and was a big hit on Reddit's r/dataisbeautiful (https://bit.ly/2YCAAzz). Unfortunately, it also revealed a problem in the data as some rides end in the East and Hudson Rivers. I could get more particular with the lat/lon exclusions, but for now leave these data points in the analysis. 
 
 
-<align="center" img width="626" alt="Screen Shot 2019-08-09 at 6 46 34 PM" src="https://user-images.githubusercontent.com/38504767/62814404-c1e49580-bade-11e9-861b-751892ae3bc6.png">
+<img width="626" alt="Screen Shot 2019-08-09 at 6 46 34 PM" src="https://user-images.githubusercontent.com/38504767/62814404-c1e49580-bade-11e9-861b-751892ae3bc6.png">
 
 
-Now that the data has been cleaned and it looks generally fine, it’s time for some feature creation. The first features I created centered around the date and time of the ride.
+Now that the data has been cleaned and it looks generally fine, it’s time for some feature engineering. The first features I created centered around the date and time of the ride.
 
 <img width="165" alt="Screen Shot 2019-08-09 at 6 52 24 PM" src="https://user-images.githubusercontent.com/38504767/62814413-c7da7680-bade-11e9-8fe6-5fc69c5d56f1.png">
 
 
 
-Extracting the Year, Month, Day of the Month, and Hour of the ride from the timestamp of the ride was simple enough with the following commands 
+Extracting the Year, Month, Day of the Month, and Hour of the ride from the timestamp of the ride was simple enough with the following lines
 
+`
 train_df['year'] = train_df['pickup_datetime'].dt.year
 train_df['month'] = train_df['pickup_datetime'].dt.month
 train_df['day'] = train_df['pickup_datetime'].dt.day
 train_df['hour'] = train_df[‘pickup_datetime’].dt.hour
+`
 
-To see if these will help add any information to the model, I plotted the average fare by month and Year across the full time series of the data. While I was expecting modest increases due to inflation, I was completely thrown off by the massive jump in average fare in September 2012. After a little digging I found that this was a system wide price hike by yellow cabs and not a problem with the data as I originally had assumed (article: https://www.nytimes.com/2012/09/04/nyregion/new-york-taxis-to-start-charging-increased-rates.html)
+To see if these will help add any information to the model, I plotted the average fare by month and year across the full time series of the data. While I was expecting modest increases due to inflation, I was completely thrown off by the massive jump in average fare in September 2012. After a little digging, I found that this was a system-wide price hike by yellow cabs and not a problem with the data as I originally had assumed (article: https://www.nytimes.com/2012/09/04/nyregion/new-york-taxis-to-start-charging-increased-rates.html)
 
 
 <img width="928" alt="Screen Shot 2019-08-08 at 9 08 47 PM" src="https://user-images.githubusercontent.com/38504767/62814441-e2aceb00-bade-11e9-93f2-83db66999d17.png">
 
 
 
-The next plot I made was to see if the number of passengers affected the average fare. Looking at the average fare per passenger count shows that changing the number of passengers in the cab has virtually no effect on the average price of the ride.
+The next chart I made was to see if the number of passengers affected the average fare. Looking at the average fare per passenger count shows that changing the number of passengers in the cab has virtually no effect on the average price of the ride.
 
 
 <img width="517" alt="Screen Shot 2019-08-08 at 9 09 33 PM" src="https://user-images.githubusercontent.com/38504767/62814443-e50f4500-bade-11e9-9a92-6efbb4720e3b.png">
 
 
-
 Once I had a month variable, it was quick to map those months to seasons to see if that has any effect on the price of a cab. Using the following lines I create a season variable and then plot the average ride fare per seasons to see if that matters at all. 
 
+`
 season_dict = {
     12:'Winter',
     1:'Winter',
@@ -91,21 +93,20 @@ season_dict = {
     11:'Fall',
 }
 train_df['season'] = train_df['month'].map(season_dict)
+`
 
-While you can see that jump in september 2012 again, it appears that the season the ride took place in didn’t have much of an effect on price. 
+While one can see that jump in September 2012 again, it appears that the season the ride took place in didn’t have much of an effect on price. 
 
 
 <img width="682" alt="Screen Shot 2019-08-08 at 9 12 45 PM" src="https://user-images.githubusercontent.com/38504767/62814446-e8a2cc00-bade-11e9-83ca-a652f02dcddb.png">
 
 
 
+The most important feature I created, unsurprisingly, was the distance of the ride. At first I used simple Euclidian and Manhattan distances, but then was turned onto Haversine distance. The Haversine formula calculates the “great-circle distance” between two point on a sphere given that the points are in longitudinal and latitudinal coordinates. Since this formula actually accounted for the curvature of the Earth, I settled on this as the final distance metric that would go into my models. 
 
- The most important feature I created, unsurprisingly, was the distance of the ride. At first I used simple euclidian and manhattan distances, but then was turned onto Haversine distance. The Haversine formula calculates the “great-circle distance” between two point on a sphere given that the points are in longitudinal and latitudinal coordinates. Since this formula actually accounted for the curvature of the Earth, I settled on this as the final distance metric that would go into my models. 
-
-Plotting the newly-created distance of the ride vs. the fare of the ride shows some unexpected patterns. Outside of the fact that, in general, the longer the ride the more expensive it was we see very clear horizontal lines. A little research reveled these to be airport rides which have a fixed fee that is standardized across the industry. 
+Plotting the newly-created distance of the ride vs. the fare of the ride shows some unexpected patterns. Outside of the well-known fact that longer rides are more expensive, one can observe very clear horizontal lines. A little research revealed these to be airport rides, which have a fixed fee that is standardized across the industry. 
 
 <img width="545" alt="Screen Shot 2019-08-08 at 9 08 36 PM" src="https://user-images.githubusercontent.com/38504767/62814468-ffe1b980-bade-11e9-8313-ddbd32861562.png">
-
 
 
 This discovery led to the final features I made which were the distances to the major airports (JFK, Newark, and Laguardia) which I define as the smaller of the distance between the airports and the pickup or drop-off locations of the ride. To round things out I added a similar feature to these, but this time it was the distance to the center of Manhattan which I believe would be more congested and result in longer times in the taxi and higher fares.
