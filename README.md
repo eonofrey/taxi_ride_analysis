@@ -7,9 +7,9 @@ The below an analysis I did for Kaggle’s NYC Taxi Cab Fare Prediction Competit
 The data files given are as follows: 
 
 
-train.csv - a file 
-test.csv - a file 
-sample_submission.csv - a file
+- train.csv - a file containing ~55M observations with input varaibles and the target
+- test.csv - similar file with ~10k observations to predict and be scored on 
+- sample_submission.csv - an example of what a submission looks like 
 
 
 The dataset consists of the following features: 
@@ -22,29 +22,24 @@ dropoff_longitdue - float value for the longitude of where the ride ended
 droppoff_latitude - float value for the latitude of where the ride ended 
 passenger_count - int value for the number of passengers in the taxi ride 
 
-
 and then the target: 
 fare_amount - flat for the dollar amount of the cost of the taxi ride 
 
-
-
 # Exploration 
 Even after dropping NA’s, there is still some nonsensical data in the data frame including: 
-Negative cab fares
-lat/longs of 2500+ (latitude ranges from 0 to 90, longitude from 0 to 180)
-Cab rides with 0 passengers
-Cars with 208 passengers
+- Negative cab fares
+- Lat/longs of 2500+ (latitude ranges from 0 to 90, longitude from 0 to 180)
+- Cab rides with 0 passengers
+- Cars with 208 passengers
 
 For the purpose of this analysis I limited the latitudes to between -74.2 and -73.3 and the longitudes between 40.6 and 40.9 to better capture the island of Manhattan. In addition to that I dropped all rides with that did not have 1 to 6 passengers and all rides where the fare was less than $2.5 (the base minimum fare for a cab in New York). 
 
 First let’s look at the distribution of fares and passenger counts 
 
-<img width="400" alt="Screen Shot 2019-08-09 at 6 43 45 PM" src="https://user-images.githubusercontent.com/38504767/62814379-95c91480-bade-11e9-82e6-bb07e4b23594.png">  <img width="400" alt="Screen Shot 2019-08-09 at 6 42 43 PM" src="https://user-images.githubusercontent.com/38504767/62814380-9792d800-bade-11e9-90b0-4f97134e61ad.png">
+<img width="400" alt="Screen Shot 2019-08-09 at 6 43 45 PM" src="https://user-images.githubusercontent.com/38504767/62814379-95c91480-bade-11e9-82e6-bb07e4b23594.png">  <img width="380" alt="Screen Shot 2019-08-09 at 6 42 43 PM" src="https://user-images.githubusercontent.com/38504767/62814380-9792d800-bade-11e9-90b0-4f97134e61ad.png">
 
 
-
-Even after limiting the plot to show fares < $75 there is still a heavy right skew to the distribution of fairs, with the vast majority of them below $20. Single-passenger rides are by far the most common, followed by 2-passenger and then 5-passenger rides interestingly enough.
-
+Even after limiting the plot to show fares < $75 there is still a heavy right skew to the distribution of fares, with the vast majority of them below $20. Looking at the passenger distribution, single-passenger rides are by far the most common, followed by 2-passenger and then 5-passenger rides interestingly enough.
 
 
 Plotting the lat longs resulted in one of my favorite graphs I’ve ever made. Using a black background and white dots gave it the look of a satellite image of the city taken at night. Unfortunately it also revealed a problem in the data as some rides end in the East and Hudson Rivers. I could get more particular with the lat/lon exclusions but for now leave these data points in the analysis. 
