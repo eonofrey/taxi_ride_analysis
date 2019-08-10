@@ -41,7 +41,7 @@ Even after limiting the plot to show fares < $75 there is still a heavy right sk
 <img width="420" alt="Screen Shot 2019-08-09 at 6 43 45 PM" src="https://user-images.githubusercontent.com/38504767/62814379-95c91480-bade-11e9-82e6-bb07e4b23594.png">  <img width="375" alt="Screen Shot 2019-08-09 at 6 42 43 PM" src="https://user-images.githubusercontent.com/38504767/62814380-9792d800-bade-11e9-90b0-4f97134e61ad.png">
 
 
-Plotting the lat longs resulted in one of my favorite graphs I’ve ever made. Using a black background and white dots gave it the look of a satellite image of the city taken at night. Unfortunately it also revealed a problem in the data as some rides end in the East and Hudson Rivers. I could get more particular with the lat/lon exclusions but for now leave these data points in the analysis. 
+Plotting the lat/lons resulted in one of my favorite graphs I’ve ever made. Using a black background and white dots gave it the look of a satellite image of the city taken at night and was a big hit on Reddit's r/dataisbeautiful (https://bit.ly/2YCAAzz). Unfortunately, it also revealed a problem in the data as some rides end in the East and Hudson Rivers. I could get more particular with the lat/lon exclusions, but for now leave these data points in the analysis. 
 
 
 <img width="626" alt="Screen Shot 2019-08-09 at 6 46 34 PM" src="https://user-images.githubusercontent.com/38504767/62814404-c1e49580-bade-11e9-861b-751892ae3bc6.png">
