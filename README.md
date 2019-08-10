@@ -72,9 +72,9 @@ To see if these will help add any information to the model, I plotted the averag
 
 The next chart I made was to see if the number of passengers affected the average fare. Looking at the average fare per passenger count shows that changing the number of passengers in the cab has virtually no effect on the average price of the ride.
 
-
+<p align="center">
 <img width="517" alt="Screen Shot 2019-08-08 at 9 09 33 PM" src="https://user-images.githubusercontent.com/38504767/62814443-e50f4500-bade-11e9-9a92-6efbb4720e3b.png">
-
+</p>
 
 Once I had a month variable, it was quick to map those months to seasons to see if that has any effect on the price of a cab. Using the following lines I create a season variable and then plot the average ride fare per seasons to see if that matters at all. 
 
@@ -95,9 +95,9 @@ season_dict = {
 }
 train_df['season'] = train_df['month'].map(season_dict)
 `
-
+<p align="center">
 While one can see that jump in September 2012 again, it appears that the season the ride took place in didn’t have much of an effect on price. 
-
+</p>
 
 <img width="682" alt="Screen Shot 2019-08-08 at 9 12 45 PM" src="https://user-images.githubusercontent.com/38504767/62814446-e8a2cc00-bade-11e9-83ca-a652f02dcddb.png">
 
@@ -107,21 +107,23 @@ The most important feature I created, unsurprisingly, was the distance of the ri
 
 Plotting the newly-created distance of the ride vs. the fare of the ride shows some unexpected patterns. Outside of the well-known fact that longer rides are more expensive, one can observe very clear horizontal lines. A little research revealed these to be airport rides, which have a fixed fee that is standardized across the industry. 
 
+<p align="center">
 <img width="545" alt="Screen Shot 2019-08-08 at 9 08 36 PM" src="https://user-images.githubusercontent.com/38504767/62814468-ffe1b980-bade-11e9-8313-ddbd32861562.png">
-
+</p>
 
 This discovery led to the final features I made which were the distances to the major airports (JFK, Newark, and Laguardia) which I define as the smaller of the distance between the airports and the pickup or drop-off locations of the ride. To round things out I added a similar feature to these, but this time it was the distance to the center of Manhattan which I believe would be more congested and result in longer times in the taxi and higher fares.
 
 
 # Feature Selection
 
-There is a great article for feature selection that lists 3 main waits to select features for your model: 1. Correlation plots 2. Univaraite Statistics 3. Feature Importance
+There is a great article on the Medium (https://bit.ly/2yGvGmq) for feature selection that lists 3 main ways to select features for your model: 1) Correlation matrix 2) Univaraite Selection 3) Feature Importance
 
 ### Correlation Plot 
-Below is the correlation plot of the base features along with the features I created. Not suprisingly, the distance metrics are the most correlated with the fare amount. These distances are also highly correlated with each other, which is a problem for linear regression models that can’t have high amounts of multicollinearity. 
+Below is the correlation matrix of all of the new and old features in the data. Not suprisingly, the distance metrics are the most correlated with the fare amount. These distances are also highly correlated with each other, which is a problem for linear regression models that can’t have high amounts of multicollinearity. 
 
+<p align="center">
 <img width="684" alt="Screen Shot 2019-08-09 at 7 55 10 PM" src="https://user-images.githubusercontent.com/38504767/62814607-9d3ced80-badf-11e9-80cc-d557319a43eb.png">
-
+</p>
 
 ### SelectKbest
 
