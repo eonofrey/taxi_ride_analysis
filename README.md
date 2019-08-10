@@ -127,22 +127,24 @@ Below is the correlation matrix of all of the new and old features in the data. 
 
 ### SelectKbest
 
-Sklearn’s SelectKBest module will select the top features for the model, but only looks at them in isolation. It uses _______ as a metric to define feature importance. 
+Sklearn’s SelectKBest module will select the top features for the model, but only looks at them in isolation. It uses the regression's F statistic as a metric to define feature importance. 
 
+<p align="center">
 <img width="329" alt="Screen Shot 2019-08-08 at 9 14 30 PM" src="https://user-images.githubusercontent.com/38504767/62814480-1d168800-badf-11e9-979f-fe8f6d09db91.png">
-
+</p>
 
 ### Feature Importance 
 A great component of decision trees and random forests is that they calculate the importance of the features given to them. After fitting Sklearn’s ExtraTreeClassifier on the data you can then extra the importance of each feature as determined by the model. 
 
-
+<p align="center">
 <img width="503" alt="Screen Shot 2019-08-08 at 9 18 14 PM" src="https://user-images.githubusercontent.com/38504767/62814500-3d464700-badf-11e9-980c-f3eae46650d3.png">
+</p>
 
 # Prediction
 
 The two models I used in this analysis were a basic linear regression and a random forest. 
 
-## Regression 
+### Regression 
 Since the correlation plot reveled massive correlations between the distance metrics, I’m going to only use Haversine distance for the linear regression. However, regression also assumes that variables are normally distributed. Plotting the distribution fo a few reveals that not to be the case. In these situations, it’s best to transform the variables either with log or square root transformations to coerce them to be normally distributed. Below are the same variables after I apply various transformations
 
 <img width="504" alt="Screen Shot 2019-08-08 at 9 19 52 PM" src="https://user-images.githubusercontent.com/38504767/62814487-299ae080-badf-11e9-9286-f9d494b663cd.png">
