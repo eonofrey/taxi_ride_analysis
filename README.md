@@ -43,8 +43,9 @@ Even after limiting the plot to show fares < $75 there is still a heavy right sk
 
 Plotting the lat/lons resulted in one of my favorite graphs I’ve ever made. Using a black background and white dots gave it the look of a satellite image of the city taken at night and was a big hit on Reddit's r/dataisbeautiful (https://bit.ly/2YCAAzz). Unfortunately, it also revealed a problem in the data as some rides end in the East and Hudson Rivers. I could get more particular with the lat/lon exclusions, but for now leave these data points in the analysis. 
 
-
-<img width="626" alt="Screen Shot 2019-08-09 at 6 46 34 PM" src="https://user-images.githubusercontent.com/38504767/62814404-c1e49580-bade-11e9-861b-751892ae3bc6.png">
+<p align="center">
+<img width="626" alt="Screen Shot 2019-08-09 at 6 46 34 PM" src="https://user-images.githubusercontent.com/38504767/62814404-c1e49580-bade-11e9-861b-751892ae3bc6.png"> 
+</p>
 
 
 Now that the data has been cleaned and it looks generally fine, it’s time for some feature engineering. The first features I created centered around the date and time of the ride.
