@@ -115,20 +115,20 @@ This discovery led to the final features I made which were the distances to the 
 
 There is a great article for feature selection that lists 3 main waits to select features for your model: 1. Correlation plots 2. Univaraite Statistics 3. Feature Importance
 
-#### Correlation Plot 
+### Correlation Plot 
 Below is the correlation plot of the base features along with the features I created. Not suprisingly, the distance metrics are the most correlated with the fare amount. These distances are also highly correlated with each other, which is a problem for linear regression models that can’t have high amounts of multicollinearity. 
 
 <img width="684" alt="Screen Shot 2019-08-09 at 7 55 10 PM" src="https://user-images.githubusercontent.com/38504767/62814607-9d3ced80-badf-11e9-80cc-d557319a43eb.png">
 
 
-#### SelectKbest
+### SelectKbest
 
 Sklearn’s SelectKBest module will select the top features for the model, but only looks at them in isolation. It uses _______ as a metric to define feature importance. 
 
 <img width="329" alt="Screen Shot 2019-08-08 at 9 14 30 PM" src="https://user-images.githubusercontent.com/38504767/62814480-1d168800-badf-11e9-979f-fe8f6d09db91.png">
 
 
-#### Feature Importance 
+### Feature Importance 
 A great component of decision trees and random forests is that they calculate the importance of the features given to them. After fitting Sklearn’s ExtraTreeClassifier on the data you can then extra the importance of each feature as determined by the model. 
 
 
