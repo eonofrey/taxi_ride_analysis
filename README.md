@@ -4,7 +4,7 @@
 The below an analysis I did for Kaggle’s NYC Taxi Cab Fare Prediction Competition hosted by Google Cloud and Coursera. The competition claimed that a basic model based on the distance between two points would end up with an RMSE of ~$8, so that was the target to beat. 
 
 
-The data files given are as follows: 
+The files provided are as follows: 
 
 
 - train.csv - a file containing ~55M observations with input varaibles and the target
@@ -15,30 +15,30 @@ The data files given are as follows:
 The dataset consists of the following features: 
 
 
-pickup_datetime - timestambe value of when the ride started
-pickup_longitude - float value for the longitude of where the ride started
-pickup_latitude - float value for the latitude of where the ride started
-dropoff_longitdue - float value for the longitude of where the ride ended
-droppoff_latitude - float value for the latitude of where the ride ended 
-passenger_count - int value for the number of passengers in the taxi ride 
+* pickup_datetime - timestamp value of when the ride started
+* pickup_longitude - float value for the longitude of where the ride started
+* pickup_latitude - float value for the latitude of where the ride started
+* dropoff_longitdue - float value for the longitude of where the ride ended
+* droppoff_latitude - float value for the latitude of where the ride ended 
+* passenger_count - int value for the number of passengers in the taxi cab 
 
 and then the target: 
-fare_amount - flat for the dollar amount of the cost of the taxi ride 
+* fare_amount - float value for the cost of the taxi ride (in dollars)
 
 # Exploration 
-Even after dropping NA’s, there is still some nonsensical data in the data frame including: 
+Even after dropping NA’s, there is still some nonsensical data including: 
 - Negative cab fares
-- Lat/longs of 2500+ (latitude ranges from 0 to 90, longitude from 0 to 180)
-- Cab rides with 0 passengers
-- Cars with 208 passengers
+- Lat/longs of 2500+ (latitude ranges from -90 to 90, longitude from -180 to 180)
+- Rides with 0 passengers
+- Rides with 208 passengers
 
-For the purpose of this analysis I limited the latitudes to between -74.2 and -73.3 and the longitudes between 40.6 and 40.9 to better capture the island of Manhattan. In addition to that I dropped all rides with that did not have 1 to 6 passengers and all rides where the fare was less than $2.5 (the base minimum fare for a cab in New York). 
+For the purpose of this analysis I limited the latitudes to between -74.2 and -73.3 and the longitudes between 40.6 and 40.9 to better capture the island of Manhattan. In addition to that, I dropped all rides that had fewer than 1 or more than 6 passengers and all rides where the fare was less than $2.5 (the base fare for a cab in New York). 
 
 First let’s look at the distribution of fares and passenger counts 
 
 Even after limiting the plot to show fares < $75 there is still a heavy right skew to the distribution of fares, with the vast majority of them below $20. Looking at the passenger distribution, single-passenger rides are by far the most common, followed by 2-passenger and then 5-passenger rides interestingly enough.
 
-<img width="420" alt="Screen Shot 2019-08-09 at 6 43 45 PM" src="https://user-images.githubusercontent.com/38504767/62814379-95c91480-bade-11e9-82e6-bb07e4b23594.png">  <img width="350" alt="Screen Shot 2019-08-09 at 6 42 43 PM" src="https://user-images.githubusercontent.com/38504767/62814380-9792d800-bade-11e9-90b0-4f97134e61ad.png">
+<img width="420" alt="Screen Shot 2019-08-09 at 6 43 45 PM" src="https://user-images.githubusercontent.com/38504767/62814379-95c91480-bade-11e9-82e6-bb07e4b23594.png">  <img width="375" alt="Screen Shot 2019-08-09 at 6 42 43 PM" src="https://user-images.githubusercontent.com/38504767/62814380-9792d800-bade-11e9-90b0-4f97134e61ad.png">
 
 
 Plotting the lat longs resulted in one of my favorite graphs I’ve ever made. Using a black background and white dots gave it the look of a satellite image of the city taken at night. Unfortunately it also revealed a problem in the data as some rides end in the East and Hudson Rivers. I could get more particular with the lat/lon exclusions but for now leave these data points in the analysis. 
