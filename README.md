@@ -145,7 +145,7 @@ A great component of decision trees and random forests is that they calculate th
 The two models I used in this analysis were a basic linear regression and a random forest. 
 
 ### Regression 
-Since the correlation plot reveled massive correlations between the distance metrics, I’m going to only use Haversine distance for the linear regression. However, regression also assumes that variables are normally distributed. Plotting the distribution for a few or the input variables shows violations of that assumption. In these situations, it’s best to transform the variables either with log or square root transformations to coerce them to be normally distributed. Below are the same variables after I apply various transformations
+Since the correlation plot revealed massive correlations between the distance metrics, I used only Haversine distance for the linear regression. However, regression also assumes that variables are normally distributed. Plotting the distribution for a few of the input variables shows violations of that assumption. In these situations, it’s best to transform the variables either with log or square root transformations to coerce them to be normally distributed. Below are the same variables after I apply various transformations
 
 <img width="450" alt="Screen Shot 2019-08-08 at 9 19 52 PM" src="https://user-images.githubusercontent.com/38504767/62814487-299ae080-badf-11e9-9286-f9d494b663cd.png">
 
@@ -157,7 +157,7 @@ With the variables normally distributed and not too correlated with each other, 
 
 ## Random Forest 
 
-Thankfully, a random forest can handle non-normally distributed variables. I again dropped euclidian and manhattan distance from the training data as these don’t add much information past Haversine distance and then fit a random forest on the data. After some quick playing around with the tuning parameters I settled on 100 estimators and a max depth of 30. 
+Thankfully, a random forest can handle non-normally distributed variables. I again dropped Euclidian and Manhattan distance variables from the training data as these don’t add much information past Haversine distance and then fit a random forest on the data. After some quick playing around with the tuning parameters I settled on 100 estimators and a max depth of 30. 
 
 The result was an RMSE of $3.63 for the prediction of the validation data. This significantly outperformed the linear regression model and is far below the competition’s baseline model. 
 
