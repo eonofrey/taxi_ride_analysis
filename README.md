@@ -7,7 +7,7 @@ The below an analysis I did for Kaggle’s NYC Taxi Cab Fare Prediction Competit
 The files provided are as follows: 
 
 
-- train.csv - a file containing ~55M observations with input varaibles and the target
+- train.csv - a file containing ~55M observations with input variables and the target
 - test.csv - similar file with ~10k observations to predict and be scored on 
 - sample_submission.csv - an example of what a submission looks like 
 
@@ -28,7 +28,7 @@ and then the target:
 # Exploration 
 Even after dropping NA’s, there is still some nonsensical data including: 
 - Negative cab fares
-- Lat/longs of 2500+ (latitude ranges from -90 to 90, longitude from -180 to 180)
+- Lat/lons of 2500+ (latitude ranges from -90 to 90, longitude from -180 to 180)
 - Rides with 0 passengers
 - Rides with 208 passengers
 
@@ -111,15 +111,15 @@ Plotting the newly-created distance of the ride vs. the fare of the ride shows s
 <img width="545" alt="Screen Shot 2019-08-08 at 9 08 36 PM" src="https://user-images.githubusercontent.com/38504767/62814468-ffe1b980-bade-11e9-8313-ddbd32861562.png">
 </p>
 
-This discovery led to the final features I made which were the distances to the major airports (JFK, Newark, and Laguardia) which I define as the smaller of the distance between the airports and the pickup or drop-off locations of the ride. To round things out I added a similar feature to these, but this time it was the distance to the center of Manhattan which I believe would be more congested and result in longer times in the taxi and higher fares.
+This discovery led to the final features I made which were the distances to the major airports (JFK, Newark, and LaGuardia) which I define as the smaller of the distance between the airports and the pickup or drop-off locations of the ride. To round things out I added a similar feature to these, but this time it was the distance to the center of Manhattan which I believe would be more congested and result in longer times in the taxi and higher fares.
 
 
 # Feature Selection
 
-There is a great article on the Medium (https://bit.ly/2yGvGmq) for feature selection that lists 3 main ways to select features for your model: 1) Correlation matrix 2) Univaraite Selection 3) Feature Importance
+There is a great article on the Medium (https://bit.ly/2yGvGmq) for feature selection that lists 3 main ways to select features for your model: 1) Correlation matrix 2) Univariate Selection 3) Feature Importance
 
 ### Correlation Plot 
-Below is the correlation matrix of all of the new and old features in the data. Not suprisingly, the distance metrics are the most correlated with the fare amount. These distances are also highly correlated with each other, which is a problem for linear regression models that can’t have high amounts of multicollinearity. 
+Below is the correlation matrix of all of the new and old features in the data. Not surprisingly, the distance metrics are the most correlated with the fare amount. These distances are also highly correlated with each other, which is a problem for linear regression models that can’t have high amounts of multicollinearity. 
 
 <p align="center">
 <img width="684" alt="Screen Shot 2019-08-09 at 7 55 10 PM" src="https://user-images.githubusercontent.com/38504767/62814607-9d3ced80-badf-11e9-80cc-d557319a43eb.png">
@@ -168,12 +168,6 @@ Overall I thoroughly enjoyed working with this data and even learned some things
 - Remove rides that end up in the water
 - Train on more data 
 - Try using other modles (XGBoost, LASSO, Ridge) 
-
-
-
-
- 
-
 
 
 
