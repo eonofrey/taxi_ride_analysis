@@ -95,12 +95,12 @@ season_dict = {
 }
 train_df['season'] = train_df['month'].map(season_dict)
 `
-<p align="center">
+
 While one can see that jump in September 2012 again, it appears that the season the ride took place in didn’t have much of an effect on price. 
-</p>
 
+<p align="center">
 <img width="682" alt="Screen Shot 2019-08-08 at 9 12 45 PM" src="https://user-images.githubusercontent.com/38504767/62814446-e8a2cc00-bade-11e9-83ca-a652f02dcddb.png">
-
+</p>
 
 
 The most important feature I created, unsurprisingly, was the distance of the ride. At first I used simple Euclidian and Manhattan distances, but then was turned onto Haversine distance. The Haversine formula calculates the “great-circle distance” between two point on a sphere given that the points are in longitudinal and latitudinal coordinates. Since this formula actually accounted for the curvature of the Earth, I settled on this as the final distance metric that would go into my models. 
@@ -145,15 +145,15 @@ A great component of decision trees and random forests is that they calculate th
 The two models I used in this analysis were a basic linear regression and a random forest. 
 
 ### Regression 
-Since the correlation plot reveled massive correlations between the distance metrics, I’m going to only use Haversine distance for the linear regression. However, regression also assumes that variables are normally distributed. Plotting the distribution fo a few reveals that not to be the case. In these situations, it’s best to transform the variables either with log or square root transformations to coerce them to be normally distributed. Below are the same variables after I apply various transformations
+Since the correlation plot reveled massive correlations between the distance metrics, I’m going to only use Haversine distance for the linear regression. However, regression also assumes that variables are normally distributed. Plotting the distribution for a few or the input variables shows violations of that assumption. In these situations, it’s best to transform the variables either with log or square root transformations to coerce them to be normally distributed. Below are the same variables after I apply various transformations
 
-<img width="504" alt="Screen Shot 2019-08-08 at 9 19 52 PM" src="https://user-images.githubusercontent.com/38504767/62814487-299ae080-badf-11e9-9286-f9d494b663cd.png">
-
-
-<img width="495" alt="Screen Shot 2019-08-08 at 9 20 13 PM" src="https://user-images.githubusercontent.com/38504767/62814488-2b64a400-badf-11e9-83fe-1cf40fb920bc.png">
+<img width="450" alt="Screen Shot 2019-08-08 at 9 19 52 PM" src="https://user-images.githubusercontent.com/38504767/62814487-299ae080-badf-11e9-9286-f9d494b663cd.png">
 
 
-With the variables normally distributed and not correlated with each other, I fit the linear regression model and ended up with an RMSE of $4.64 for the prediction of the validation data, a large improvement over the ~$8 in the competition’s baseline model. 
+<img width="450" alt="Screen Shot 2019-08-08 at 9 20 13 PM" src="https://user-images.githubusercontent.com/38504767/62814488-2b64a400-badf-11e9-83fe-1cf40fb920bc.png">
+
+
+With the variables normally distributed and not too correlated with each other, I fit the linear regression model and ended up with an RMSE of $4.64 for the prediction of the validation data. The data cleaning and feature enginnering led to a large improvement over the competition baseline model's RMSE of $8. 
 
 ## Random Forest 
 
@@ -165,9 +165,9 @@ Overall I thoroughly enjoyed working with this data and even learned some things
 
 
 # Future Directions 
-- remove water points 
-- train on more data 
-- other models like xgboost 
+- Remove rides that end up in the water
+- Train on more data 
+- Try using other modles (XGBoost, LASSO, Ridge) 
 
 
 
